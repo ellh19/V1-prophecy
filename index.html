@@ -131,7 +131,7 @@
       font-size:.86rem;
       max-width:200px;
       text-align:center;
-      transform:translate(-12px, 12px) rotate(-5deg);
+      transform:translate(-12px, 12px) rotate(5deg);
       transform-origin:center;
       line-height:1.18;
     }
@@ -437,30 +437,33 @@
     }
     .leaf-bottom{
       position:absolute;
-      left:0;
-      bottom:2px;
+      left:-2px;
+      bottom:-2px;
       width:45px;
       height:64px;
       color:#6f6aa7;
       opacity:.75;
     }
     .bank-note{
-      width:54%;
-      max-width:370px;
+      position:absolute;
+      right:1%;
+      bottom:14px;
+      width:44%;
+      max-width:300px;
       color:#7a82ad;
-      font-size:.52rem;
-      line-height:1.3;
-      padding-top:14px;
+      font-size:.46rem;
+      line-height:1.28;
+      text-align:left;
     }
     .bottom-phrase{
       position:absolute;
-      right:1%;
-      bottom:20px;
+      left:8%;
+      bottom:18px;
       width:42%;
       text-align:center;
       font-size:.86rem;
       line-height:1.2;
-      transform:rotate(4deg);
+      transform:rotate(-4deg);
       transform-origin:center;
     }
 
@@ -562,7 +565,7 @@
       .top-phrase{
         font-size:.75rem;
         max-width:170px;
-        transform:translate(-12px, 12px) rotate(-5deg);
+        transform:translate(-12px, 12px) rotate(5deg);
         line-height:1.15;
       }
 .summary{gap:7px;margin-bottom:10px}
@@ -612,8 +615,8 @@
         padding-left:50px;
       }
       .leaf-bottom{width:40px;height:59px}
-      .bank-note{font-size:.47rem;width:52%;padding-top:13px}
-      .bottom-phrase{font-size:.75rem;width:45%;right:0;bottom:19px;transform:rotate(4deg)}
+      .bank-note{font-size:.40rem;width:43%;right:0;bottom:12px;padding-top:0}
+      .bottom-phrase{font-size:.75rem;width:45%;left:7%;right:auto;bottom:18px;transform:rotate(-4deg)}
       .grid2{grid-template-columns:1fr}
     }
 
@@ -654,7 +657,7 @@
     </div>
 
     <div class="meta">
-      <div class="pill">v1.10 · local only</div>
+      <div class="pill">v1.11 · local only</div>
       <div class="scribble top-phrase">love this financially<br>responsible journey<br>for you ♡</div>
 </div>
   </header>
