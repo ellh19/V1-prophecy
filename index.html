@@ -793,6 +793,176 @@
     .summary-card{padding-left:18px}
     @media(max-width:520px){.summary-card{padding-left:14px}}
 
+  
+    /* ============================================================
+       ORACLE V2 / PASS 2 — Tiny Art Department
+       Art integration only. Functional Pass 1 logic remains intact.
+       ============================================================ */
+
+    /* Paper as surface, not generic app rectangle. */
+    body{
+      background:
+        radial-gradient(circle at 14% 0%, rgba(196,191,236,.34), transparent 30rem),
+        linear-gradient(180deg,#F2EFF8 0%,#F8F2F7 100%);
+    }
+    .wrap{
+      position:relative;
+      isolation:isolate;
+      background:var(--paper);
+    }
+    .wrap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.34;
+      background-image:
+        radial-gradient(circle at 18% 24%, rgba(13,17,64,.035) 0 0.7px, transparent .9px),
+        radial-gradient(circle at 77% 64%, rgba(217,165,189,.06) 0 0.8px, transparent 1px),
+        linear-gradient(92deg, transparent 0 48%, rgba(13,17,64,.018) 49%, transparent 50%);
+      background-size:19px 23px, 27px 31px, 47px 47px;
+      mix-blend-mode:multiply;
+    }
+
+    /* Approved V2 masthead. */
+    .top{margin-bottom:8px}
+    .title-image-wrap{
+      width:min(100%,700px);
+      margin:0 auto 4px;
+    }
+    .title-image{
+      width:100%;
+      height:auto;
+      filter:drop-shadow(0 4px 8px rgba(13,17,64,.06));
+    }
+
+    /* Balance cards: art is decoration; controls remain real controls. */
+    .summary-card{
+      overflow:hidden;
+      min-height:112px;
+      display:flex;
+      align-items:center;
+      padding:13px 50px 12px 15px;
+    }
+    .summary-copy{
+      position:relative;
+      z-index:2;
+      min-width:0;
+      width:100%;
+    }
+    .summary-art{
+      position:absolute;
+      z-index:1;
+      pointer-events:none;
+      user-select:none;
+      object-fit:contain;
+      opacity:.94;
+      filter:drop-shadow(0 4px 5px rgba(13,17,64,.08));
+    }
+    .coins-art{
+      width:92px;
+      right:-11px;
+      bottom:-14px;
+      transform:rotate(1deg);
+    }
+    .crystal-art{
+      width:91px;
+      right:-10px;
+      bottom:-13px;
+      transform:rotate(-1deg);
+    }
+    .summary-card .icon-btn{
+      z-index:4;
+      background:rgba(253,246,249,.64);
+      backdrop-filter:blur(2px);
+      -webkit-backdrop-filter:blur(2px);
+    }
+
+    /* HANDMADE BORDER PROTOTYPE — CURRENT BALANCE ONLY.
+       Clean at normal distance; close inspection shows a second traced line. */
+    .summary-card.current{
+      border-width:1.5px;
+      overflow:visible;
+    }
+    .summary-card.current::after{
+      content:"";
+      position:absolute;
+      inset:2px -2px -2px 2px;
+      border:1px solid rgba(80,151,142,.33);
+      border-radius:20px 24px 21px 23px;
+      pointer-events:none;
+      transform:rotate(.10deg);
+      z-index:0;
+    }
+
+    /* Ledger shifts from glossy gradient toward printed-paper editorial. */
+    .ledger-card{
+      background:rgba(255,250,251,.76);
+      box-shadow:0 3px 0 rgba(13,17,64,.025);
+    }
+    .ledger-head{
+      background:
+        linear-gradient(90deg,rgba(196,191,236,.44),rgba(173,168,234,.29));
+    }
+    .ledger-title{
+      font-family:Georgia,"Times New Roman",serif;
+      font-weight:600;
+      letter-spacing:-.025em;
+    }
+    .tx-row{
+      background:rgba(255,249,251,.76);
+    }
+
+    /* Approved ripped-paper marginalia, replacing faux-script text. */
+    .footer{
+      min-height:106px;
+    }
+    .bottom-phrase{display:none!important}
+    .bottom-phrase-img{
+      position:absolute;
+      right:-1%;
+      bottom:10px;
+      width:55%;
+      height:auto;
+      object-fit:contain;
+      transform:rotate(1.3deg);
+      transform-origin:center;
+      pointer-events:none;
+      user-select:none;
+      filter:drop-shadow(0 2px 3px rgba(13,17,64,.05));
+    }
+
+    @media(max-width:560px){
+      .title-image-wrap{margin-bottom:3px}
+      .summary-card{
+        min-height:104px;
+        padding:11px 41px 10px 13px;
+      }
+      .coins-art{width:78px;right:-13px;bottom:-11px}
+      .crystal-art{width:76px;right:-11px;bottom:-9px}
+      .summary-card .icon-btn{
+        top:5px;
+        right:4px;
+      }
+      .footer{min-height:98px}
+      .bottom-phrase-img{
+        right:-2%;
+        bottom:8px;
+        width:58%;
+      }
+    }
+
+    @media(max-width:380px){
+      .summary-card{
+        min-height:100px;
+        padding-right:38px;
+      }
+      .coins-art{width:73px}
+      .crystal-art{width:71px}
+      .bottom-phrase-img{width:59%;right:-2%}
+    }
+
   </style>
 </head>
 <body>
@@ -800,25 +970,31 @@
   <header class="top">
     <div class="brand">
       <div class="title-image-wrap">
-        <img class="title-image" src="./title-logo.png" alt="The Amazing Prophetic Oracle of Fiduciary Fiscal Fuckery">
+        <img class="title-image" src="./oracle-v2-masthead.png" alt="The Amazing Prophetic Oracle of Fiduciary Fiscal Fuckery">
       </div>
     </div>
   </header>
 
   <section class="summary" aria-label="Balance summary">
     <div class="summary-card current">
-      <div class="summary-label">Current balance</div>
-      <div class="summary-value" id="currentSummary">$0.00</div>
-      <div class="summary-date" id="currentDateLabel">as of today</div>
+      <img class="summary-art coins-art" src="./oracle-coins.png" alt="" aria-hidden="true">
+      <div class="summary-copy">
+        <div class="summary-label">Current balance</div>
+        <div class="summary-value" id="currentSummary">$0.00</div>
+        <div class="summary-date" id="currentDateLabel">as of today</div>
+      </div>
       <button class="icon-btn" id="openingCardBtn" aria-label="Set starting balance" title="Set starting balance">
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16.5V20h3.5L18.2 9.3l-3.5-3.5L4 16.5Zm16.7-9.7a1 1 0 0 0 0-1.4l-2.1-2.1a1 1 0 0 0-1.4 0l-1.6 1.6 3.5 3.5 1.6-1.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       </button>
     </div>
 
     <div class="summary-card projected">
-      <div class="summary-label">Projected balance</div>
-      <div class="summary-value" id="projectedSummary">$0.00</div>
-      <div class="summary-date" id="projectionDateLabel">as of Sep 9, 2026</div>
+      <img class="summary-art crystal-art" src="./oracle-crystal-ball.png" alt="" aria-hidden="true">
+      <div class="summary-copy">
+        <div class="summary-label">Projected balance</div>
+        <div class="summary-value" id="projectedSummary">$0.00</div>
+        <div class="summary-date" id="projectionDateLabel">as of Sep 9, 2026</div>
+      </div>
       <input id="projectionDate" type="date" aria-label="Projected balance date" class="projection-date-hidden">
       <button class="icon-btn" id="projectionCalendarBtn" aria-label="Choose projection date" title="Choose projection date">
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2v3M18 2v3M3.5 8h17M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 12h2M11 12h2M15 12h2M7 16h2M11 16h2M15 16h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -853,7 +1029,7 @@
 
   <footer class="footer">
 <div class="bank-note">Weekend/Canada closures: income moves to previous banking day.<br>Debits move to following banking day.</div>
-    <div class="scribble bottom-phrase">only one impulse purchase?<br>what is this, les mis? ♡</div>
+    <img class="bottom-phrase-img" src="./oracle-les-mis-note.png" alt="only one impulse purchase? what is this, les mis?">
     <div class="pill">v1.23 · local only</div>
   </footer>
 </div>
