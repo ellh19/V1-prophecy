@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#fbebee">
-  <title>Chequebook With Prophecy</title>
+  <title>The Amazing Prophetic Oracle of Fiduciary Fiscal Fuckery</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icon-192.png">
   <style>
@@ -64,60 +64,58 @@
 
     /* ---------- header ---------- */
     .top{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 180px;
-      gap:10px;
-      align-items:start;
-      margin-bottom:10px;
+      position:relative;
+      margin-bottom:12px;
+      padding:3px 4px 2px;
     }
     .brand{
+      position:relative;
+      min-height:112px;
       display:flex;
-      align-items:flex-start;
-      gap:7px;
-      min-width:0;
-      padding-top:8px;
+      align-items:center;
+      justify-content:center;
+    }
+    .title-lockup{
+      position:relative;
+      width:min(100%,620px);
+      padding-right:82px;
+      text-align:center;
     }
     .title{
       margin:0;
-      line-height:.96;
-      letter-spacing:-.04em;
-      font-size:clamp(1.75rem,5.8vw,2.45rem);
+      color:var(--ink);
+      line-height:.94;
+      letter-spacing:-.045em;
       font-weight:470;
     }
-    .title-line2{white-space:nowrap;display:inline-block}
-    .title .with{
-      color:#e6a0bc;
+    .title-kicker{
+      display:block;
+      font-size:clamp(1.12rem,3.8vw,1.48rem);
+      margin-bottom:1px;
+    }
+    .title-main{
+      display:block;
+      font-size:clamp(1.72rem,5.9vw,2.55rem);
+      white-space:nowrap;
+    }
+    .title-sub{
+      display:block;
+      margin-top:7px;
+      color:#df91af;
       font-family:"Comic Sans MS","Segoe Print","Bradley Hand",cursive;
-      font-size:.82em;
+      font-size:clamp(.88rem,3.1vw,1.2rem);
       font-weight:400;
       font-style:italic;
-      letter-spacing:-.04em;
-      margin-right:.08em;
+      line-height:1.05;
+      letter-spacing:-.025em;
+      white-space:nowrap;
     }
     .crystal{
-      width:50px;
-      flex:0 0 auto;
-      margin-top:13px;
-    }
-    .meta{
-      position:relative;
-      min-height:88px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      padding-right:18px;
-    }
-    .pill{
-      align-self:center;
-      border-radius:999px;
-      background:#e8eafb;
-      color:#555b8c;
-      padding:4px 10px;
-      font-size:.64rem;
-      letter-spacing:.01em;
-      white-space:nowrap;
-      margin:0 0 8px 0;
+      position:absolute;
+      width:68px;
+      right:5px;
+      top:17px;
+      overflow:visible;
     }
     .scribble{
       font-family:"Comic Sans MS","Segoe Print","Bradley Hand",cursive;
@@ -127,25 +125,6 @@
       line-height:1.23;
       letter-spacing:.01em;
     }
-    .top-phrase{
-      font-size:.86rem;
-      max-width:200px;
-      text-align:center;
-      transform:translate(-12px, 6px) rotate(1deg);
-      transform-origin:center;
-      line-height:1.18;
-    }
-    .leaf-top{
-      position:absolute;
-      right:-4px;
-      top:1px;
-      width:31px;
-      height:82px;
-      color:#6f6aa7;
-      opacity:.78;
-      pointer-events:none;
-    }
-
     /* ---------- top cards ---------- */
     .summary{
       display:grid;
@@ -274,6 +253,15 @@
       font-size:1.2rem;
       font-weight:500;
       letter-spacing:-.035em;
+    }
+    .ledger-phrase{
+      margin-left:auto;
+      padding-right:5px;
+      font-size:.69rem;
+      text-align:center;
+      line-height:1.08;
+      transform:rotate(3deg);
+      transform-origin:center;
     }
     .ledger-icons{
       display:flex;
@@ -431,20 +419,32 @@
 
     .footer{
       position:relative;
-      min-height:72px;
+      min-height:82px;
       margin-top:4px;
-      padding:10px 6px 0 6px;
+      padding:8px 6px 0 6px;
     }
-.bank-note{
+    .bank-note{
       position:absolute;
       right:1%;
-      bottom:14px;
+      top:10px;
       width:44%;
       max-width:300px;
       color:#7a82ad;
       font-size:.46rem;
       line-height:1.28;
       text-align:left;
+    }
+    .pill{
+      position:absolute;
+      right:1%;
+      bottom:7px;
+      border-radius:999px;
+      background:#e8eafb;
+      color:#555b8c;
+      padding:4px 9px;
+      font-size:.58rem;
+      letter-spacing:.01em;
+      white-space:nowrap;
     }
     .bottom-phrase{
       position:absolute;
@@ -536,29 +536,14 @@
         padding:16px 12px 12px;
         border-radius:28px;
       }
-      .top{
-        grid-template-columns:minmax(0,1fr) 128px;
-        gap:4px;
-        margin-bottom:7px;
-      }
-      .brand{gap:4px}
-      .title{font-size:1.72rem}
-      .crystal{width:42px;margin-top:9px}
-      .meta{
-        min-height:82px;
-        padding-right:9px;
-      }
-      .pill{
-        font-size:.56rem;
-        padding:4px 8px;
-        margin-bottom:7px;
-      }
-      .top-phrase{
-        font-size:.75rem;
-        max-width:170px;
-        transform:translate(-12px, 6px) rotate(1deg);
-        line-height:1.15;
-      }
+      .top{margin-bottom:8px;padding:1px 0 0}
+      .brand{min-height:101px}
+      .title-lockup{width:100%;padding-right:61px}
+      .title-kicker{font-size:1rem}
+      .title-main{font-size:1.72rem}
+      .title-sub{font-size:.79rem;margin-top:6px}
+      .crystal{width:58px;right:0;top:17px}
+      .pill{font-size:.52rem;padding:3px 7px}
 .summary{gap:7px;margin-bottom:10px}
       .summary-card{padding:10px 9px 9px;border-radius:18px}
       .summary-label{font-size:.67rem;margin-bottom:4px}
@@ -572,6 +557,7 @@
       .add-btn .plus{font-size:1.45rem}
       .ledger-head{min-height:44px;padding:8px 10px}
       .ledger-title{font-size:1.08rem}
+      .ledger-phrase{font-size:.61rem;padding-right:2px}
       #ledger{padding:5px 7px 7px}
       .tx-row{
         grid-template-columns:56px minmax(0,1fr) 70px 27px;
@@ -600,20 +586,20 @@
         border-radius:13px;
       }
       .utility-btn svg,.utility-label svg{width:18px;height:18px}
-      .footer{
-        min-height:70px;
-        margin-top:2px;
-        padding-left:6px;
-      }
-.bank-note{font-size:.40rem;width:43%;right:0;bottom:12px;padding-top:0}
+      .footer{min-height:78px;margin-top:2px;padding-left:6px}
+      .bank-note{font-size:.40rem;width:43%;right:0;top:8px}
       .bottom-phrase{font-size:.86rem;width:48%;left:2%;right:auto;bottom:18px;transform:rotate(-4deg)}
+      .pill{right:0;bottom:5px}
       .grid2{grid-template-columns:1fr}
     }
 
     @media(max-width:380px){
-      .title{font-size:1.55rem}
-      .top{grid-template-columns:minmax(0,1fr) 116px}
-      .top-phrase{font-size:.75rem;max-width:170px}
+      .title-main{font-size:1.56rem}
+      .title-kicker{font-size:.94rem}
+      .title-sub{font-size:.72rem}
+      .title-lockup{padding-right:56px}
+      .crystal{width:54px;top:19px}
+      .ledger-phrase{font-size:.56rem}
       .summary-value{font-size:1.3rem}
       .tx-row{grid-template-columns:52px minmax(0,1fr) 64px 25px}
       .tx-amount{font-size:.7rem}
@@ -626,30 +612,31 @@
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <h1 class="title">Chequebook<br><span class="title-line2"><span class="with">With</span> Prophecy</span></h1>
-      <svg class="crystal" viewBox="0 0 100 100" aria-hidden="true">
-        <defs>
-          <radialGradient id="orb" cx="35%" cy="25%" r="75%">
-            <stop offset="0%" stop-color="#f8d7ef"/>
-            <stop offset="55%" stop-color="#c989d7"/>
-            <stop offset="100%" stop-color="#9b69c4"/>
-          </radialGradient>
-        </defs>
-        <circle cx="45" cy="40" r="28" fill="url(#orb)" stroke="#9d6bb8" stroke-width="3"/>
-        <circle cx="35" cy="29" r="5" fill="#fff" opacity=".85"/>
-        <circle cx="47" cy="22" r="3" fill="#fff" opacity=".7"/>
-        <path d="M27 68h36l7 13H20z" fill="#c69155" stroke="#9b6b3c" stroke-width="2"/>
-        <path d="M28 80h34" stroke="#8e623e" stroke-width="2" stroke-linecap="round"/>
-        <path d="M76 23l2.6 6.4L85 32l-6.4 2.6L76 41l-2.6-6.4L67 32l6.4-2.6z" fill="#aacfc9"/>
-        <path d="M83 47l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#e99ab1"/>
-        <path d="M71 8l1.8 4.2L77 14l-4.2 1.8L71 20l-1.8-4.2L65 14l4.2-1.8z" fill="#c6cadf"/>
-      </svg>
+      <div class="title-lockup">
+        <h1 class="title">
+          <span class="title-kicker">The Amazing</span>
+          <span class="title-main">Prophetic Oracle</span>
+          <span class="title-sub">of Fiduciary Fiscal Fuckery</span>
+        </h1>
+        <svg class="crystal" viewBox="0 0 118 104" aria-hidden="true">
+          <defs>
+            <radialGradient id="orb" cx="34%" cy="25%" r="76%">
+              <stop offset="0%" stop-color="#ebeefb"/>
+              <stop offset="52%" stop-color="#acb8ed"/>
+              <stop offset="100%" stop-color="#97a6e8"/>
+            </radialGradient>
+          </defs>
+          <circle cx="43" cy="42" r="28" fill="url(#orb)" stroke="#7888d4" stroke-width="2.5"/>
+          <circle cx="34" cy="31" r="5" fill="#fff" opacity=".82"/>
+          <circle cx="45" cy="24" r="2.8" fill="#fff" opacity=".68"/>
+          <path d="M26 69h34l6 12H20z" fill="#f6d6dc" stroke="#e897a6" stroke-width="2"/>
+          <path d="M26 81h34" stroke="#d9869a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M88 19l2.5 6.2 6.2 2.5-6.2 2.5-2.5 6.2-2.5-6.2-6.2-2.5 6.2-2.5z" fill="#e897a6"/>
+          <path d="M101 44l2 4.8 4.8 2-4.8 2-2 4.8-2-4.8-4.8-2 4.8-2z" fill="#8fcac5"/>
+          <path d="M82 58l1.7 4.1 4.1 1.7-4.1 1.7-1.7 4.1-1.7-4.1-4.1-1.7 4.1-1.7z" fill="#c1caf1"/>
+        </svg>
+      </div>
     </div>
-
-    <div class="meta">
-      <div class="pill">v1.12 · local only</div>
-      <div class="scribble top-phrase">love this financially<br>responsible journey<br>for you ♡</div>
-</div>
   </header>
 
   <section class="summary" aria-label="Balance summary">
@@ -678,6 +665,7 @@
   <section class="ledger-card" aria-label="Transactions">
     <div class="ledger-head">
       <h2 class="ledger-title">Transactions</h2>
+      <div class="scribble ledger-phrase">love this financially<br>responsible journey for you ♡</div>
     </div>
     <div id="ledger" aria-live="polite"></div>
   </section>
@@ -701,6 +689,7 @@
   <footer class="footer">
 <div class="bank-note">Weekend/Canada closures: income moves to previous banking day.<br>Debits move to following banking day.</div>
     <div class="scribble bottom-phrase">only one impulse purchase?<br>what is this, les mis? ♡</div>
+    <div class="pill">v1.13 · local only</div>
   </footer>
 </div>
 
@@ -1043,7 +1032,7 @@ document.getElementById("importFile").addEventListener("change",async e=>{
       save();
     }
   }catch(err){
-    alert("That file does not look like a valid Chequebook With Prophecy backup.");
+    alert("That file does not look like a valid Prophetic Oracle backup.");
   }
   e.target.value="";
 });
