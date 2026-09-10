@@ -815,7 +815,7 @@
   <footer class="footer">
 <div class="bank-note">Weekend/Canada closures: income moves to previous banking day.<br>Debits move to following banking day.</div>
     <div class="scribble bottom-phrase">only one impulse purchase?<br>what is this, les mis? ♡</div>
-    <div class="pill">v1.20 · local only</div>
+    <div class="pill">v1.21 · local only</div>
   </footer>
 </div>
 
@@ -855,7 +855,12 @@
 (()=>{
 const KEY="chequebook-prophecy-v1"; // DO NOT CHANGE: keeps existing data across the redesign.
 const PROJECTION_KEY="chequebook-prophecy-projection-date";
-const closures2026=new Set(["2026-01-01","2026-04-03","2026-05-18","2026-07-01","2026-09-07","2026-09-30","2026-10-12","2026-11-11","2026-12-25","2026-12-28"]);
+const bankingClosures=new Set([
+  // Payments Canada published 2026 system closures.
+  "2026-01-01","2026-04-03","2026-05-18","2026-07-01","2026-09-07","2026-09-30","2026-10-12","2026-11-11","2026-12-25","2026-12-28",
+  // Expected 2027 federal banking closures; Payments Canada had not yet published its 2027 schedule as of Sep 10, 2026.
+  "2027-01-01","2027-03-26","2027-05-24","2027-07-01","2027-09-06","2027-09-30","2027-10-11","2027-11-11","2027-12-27","2027-12-28"
+]);
 
 const todayISO=()=>{
   const d=new Date();
@@ -890,7 +895,7 @@ function addDays(s,n){
 function daysInMonth(y,m){return new Date(Date.UTC(y,m,0)).getUTCDate()}
 function isBusinessDay(s){
   const d=parseISO(s),dow=d.getUTCDay();
-  return dow!==0&&dow!==6&&!closures2026.has(s);
+  return dow!==0&&dow!==6&&!bankingClosures.has(s);
 }
 function adjustedDate(tx){
   const out=Number(tx.out)||0,inc=Number(tx.in)||0;
