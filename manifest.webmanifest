@@ -1,0 +1,14 @@
+{
+  "name": "Chequebook With Prophecy",
+  "short_name": "Prophecy",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f0eb",
+  "theme_color": "#8a5d68",
+  "description": "A local-first cash-flow ledger with recurring transactions and Canadian banking-day adjustments.",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}

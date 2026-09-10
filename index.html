@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8a5d68">
+  <title>Chequebook With Prophecy</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    :root{--bg:#f6f0eb;--card:#fffaf6;--ink:#332b2d;--muted:#75696c;--pink:#d9a5b3;--sage:#a9b59d;--brown:#8a6c5d;--line:#ded2cb;--danger:#9a5050;--shadow:0 8px 24px rgba(65,48,52,.08);--radius:18px}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+    .wrap{max-width:900px;margin:0 auto;padding:16px 12px 84px}.top{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;margin:8px 0 14px}h1{font-size:1.4rem;margin:0 0 4px}.subtitle{color:var(--muted);font-size:.9rem}.pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 10px;font-size:.8rem;color:var(--muted);white-space:nowrap}
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.summary .box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow)}.label{font-size:.75rem;color:var(--muted);margin-bottom:4px}.value{font-weight:750;font-size:1.05rem}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}button,.buttonlike{border:0;border-radius:14px;padding:11px 13px;font:inherit;font-weight:650;background:var(--brown);color:white;cursor:pointer;min-height:44px}button.secondary,.buttonlike.secondary{background:var(--card);color:var(--ink);border:1px solid var(--line)}button.sage{background:var(--sage);color:#253026}button.pink{background:var(--pink);color:#3c2d31}button.danger{background:var(--danger)}
+    input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);font:inherit;font-size:16px}.ledger-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}.ledger-scroll{overflow-x:auto}.ledger-head,.row{display:grid;grid-template-columns:110px 110px minmax(150px,1fr) 110px 125px 46px;align-items:center;min-width:760px}.ledger-head{background:#efe6e0;color:var(--muted);font-size:.78rem;font-weight:700;border-bottom:1px solid var(--line)}.ledger-head div,.row>div{padding:10px 8px;min-width:0}.row{border-bottom:1px solid var(--line);font-size:.92rem}.row:last-child{border-bottom:0}.row.adjusted{background:#fbf6ef}.row.today{outline:2px solid rgba(217,165,179,.7);outline-offset:-2px}.money{text-align:right;font-variant-numeric:tabular-nums}.balance{font-weight:750}.name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tiny{font-size:.72rem;color:var(--muted);margin-top:2px}.editbtn{background:transparent;color:var(--muted);padding:8px;min-height:auto;border-radius:10px;font-size:1.05rem}.empty{padding:28px;text-align:center;color:var(--muted)}
+    dialog{border:0;border-radius:20px;padding:0;max-width:520px;width:calc(100% - 24px);background:var(--card);color:var(--ink);box-shadow:0 25px 80px rgba(0,0,0,.28)}dialog::backdrop{background:rgba(35,28,30,.45)}.modal{padding:18px}.modal h2{margin:0 0 14px;font-size:1.2rem}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field label{display:block;font-size:.78rem;color:var(--muted);margin:0 0 5px}.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}.note{font-size:.78rem;color:var(--muted);line-height:1.4}.holiday-panel{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px}.holiday-panel summary{cursor:pointer;font-weight:700}.holiday-list{font-size:.82rem;color:var(--muted);margin-top:10px;line-height:1.55}.footer-note{font-size:.74rem;color:var(--muted);margin-top:12px;line-height:1.4}
+    @media(max-width:700px){.summary{grid-template-columns:1fr}.wrap{padding-left:10px;padding-right:10px}h1{font-size:1.25rem}.top{align-items:center}.grid2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div><h1>Chequebook With Prophecy</h1><div class="subtitle">Old-school running balance, future bills, Canadian banking-day logic.</div></div><div class="pill">v1 · local only</div></div>
+
+  <div class="summary">
+    <div class="box"><div class="label">Starting balance</div><div class="value" id="startingSummary">$0.00</div></div>
+    <div class="box"><div class="label">Projected balance today</div><div class="value" id="currentSummary">$0.00</div></div>
+    <div class="box"><div class="label">Lowest projected balance</div><div class="value" id="lowestSummary">$0.00</div></div>
+  </div>
+
+  <div class="toolbar">
+    <button class="pink" id="addBtn">＋ Transaction</button>
+    <button class="sage" id="openingBtn">Set starting balance</button>
+    <button class="secondary" id="exportBtn">Export backup</button>
+    <label class="buttonlike secondary" for="importFile">Import backup</label>
+    <input id="importFile" type="file" accept="application/json" hidden>
+  </div>
+
+  <div class="ledger-card"><div class="ledger-scroll">
+    <div class="ledger-head"><div>Date</div><div class="money">Money out</div><div>Item</div><div class="money">Money in</div><div class="money">Balance</div><div></div></div>
+    <div id="ledger" aria-live="polite"></div>
+  </div></div>
+
+  <details class="holiday-panel"><summary>2026 Canadian banking closures used by v1</summary><div class="holiday-list">
+    Jan 1 · New Year’s Day<br>Apr 3 · Good Friday<br>May 18 · Victoria Day<br>Jul 1 · Canada Day<br>Sep 7 · Labour Day<br>Sep 30 · National Day for Truth and Reconciliation<br>Oct 12 · Thanksgiving<br>Nov 11 · Remembrance Day<br>Dec 25 · Christmas Day<br>Dec 28 · Boxing Day observed
+  </div></details>
+  <div class="footer-note">Income on a weekend/Payments Canada closure moves to the previous banking day. Debits move to the following banking day. Planning tool only; individual institutions can post differently.</div>
+</div>
+
+<dialog id="txDialog"><form method="dialog" class="modal" id="txForm">
+  <h2 id="txTitle">Add transaction</h2><input type="hidden" id="txId">
+  <div class="field"><label for="txName">Item</label><input id="txName" required placeholder="e.g. Mortgage, Gas, Sun Life"></div>
+  <div class="field"><label for="txDate">Nominal date</label><input id="txDate" type="date" required></div>
+  <div class="grid2"><div class="field"><label for="txOut">Money out</label><input id="txOut" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div><div class="field"><label for="txIn">Money in</label><input id="txIn" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div></div>
+  <div class="field"><label for="txRepeat">Repeat</label><select id="txRepeat"><option value="none">Does not repeat</option><option value="weekly">Weekly</option><option value="biweekly">Every 2 weeks</option><option value="monthly">Monthly on this day</option><option value="lastday">Monthly — last day of month</option></select></div>
+  <div class="field" id="repeatUntilWrap" style="display:none"><label for="txUntil">Generate through</label><input id="txUntil" type="date"></div>
+  <div class="note">Banking-day adjustment is automatic: income moves backward; debits move forward. If both money-in and money-out are filled, the nominal date is kept.</div>
+  <div class="modal-actions"><button type="button" class="danger" id="deleteBtn" style="display:none">Delete</button><button type="button" class="secondary" id="cancelTx">Cancel</button><button type="submit">Save</button></div>
+</form></dialog>
+
+<dialog id="openingDialog"><form method="dialog" class="modal" id="openingForm">
+  <h2>Starting balance</h2><div class="field"><label for="openingDate">As of date</label><input id="openingDate" type="date" required></div><div class="field"><label for="openingBalance">Chequing balance</label><input id="openingBalance" type="number" step="0.01" inputmode="decimal" required></div><div class="note">Transactions before this date are ignored in the running balance.</div><div class="modal-actions"><button type="button" class="secondary" id="cancelOpening">Cancel</button><button type="submit">Save</button></div>
+</form></dialog>
+
+<script>
+(()=>{
+const KEY="chequebook-prophecy-v1";
+const closures2026=new Set(["2026-01-01","2026-04-03","2026-05-18","2026-07-01","2026-09-07","2026-09-30","2026-10-12","2026-11-11","2026-12-25","2026-12-28"]);
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
+let state=load();
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.transactions))return x}catch(e){}return{openingBalance:0,openingDate:todayISO(),transactions:[]}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function parseISO(s){const[y,m,d]=s.split("-").map(Number);return new Date(Date.UTC(y,m-1,d))}
+function fmtISO(d){return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`}
+function addDays(s,n){const d=parseISO(s);d.setUTCDate(d.getUTCDate()+n);return fmtISO(d)}
+function daysInMonth(y,m){return new Date(Date.UTC(y,m,0)).getUTCDate()}
+function isBusinessDay(s){const d=parseISO(s),dow=d.getUTCDay();return dow!==0&&dow!==6&&!closures2026.has(s)}
+function adjustedDate(tx){const out=Number(tx.out)||0,inc=Number(tx.in)||0;if((out>0&&inc>0)||(out===0&&inc===0))return tx.date;let d=tx.date,g=0;if(inc>0){while(!isBusinessDay(d)&&g++<10)d=addDays(d,-1)}else{while(!isBusinessDay(d)&&g++<10)d=addDays(d,1)}return d}
+function nextMonthlySameDay(s,originalDay){const d=parseISO(s);let y=d.getUTCFullYear(),m=d.getUTCMonth()+2;if(m===13){m=1;y++}const day=Math.min(originalDay,daysInMonth(y,m));return `${y}-${String(m).padStart(2,"0")}-${String(day).padStart(2,"0")}`}
+function nextLastDay(s){const d=parseISO(s);let y=d.getUTCFullYear(),m=d.getUTCMonth()+2;if(m===13){m=1;y++}const day=daysInMonth(y,m);return `${y}-${String(m).padStart(2,"0")}-${String(day).padStart(2,"0")}`}
+function expandTransactions(){const rows=[];state.transactions.forEach(tx=>{const repeat=tx.repeat||"none";if(repeat==="none"){rows.push({...tx,instanceDate:tx.date,parentId:tx.id,generated:false});return}const until=tx.until||addDays(tx.date,365);let cur=tx.date,count=0;const originalDay=parseISO(tx.date).getUTCDate();while(cur<=until&&count++<400){rows.push({...tx,id:`${tx.id}__${cur}`,instanceDate:cur,date:cur,parentId:tx.id,generated:true});if(repeat==="weekly")cur=addDays(cur,7);else if(repeat==="biweekly")cur=addDays(cur,14);else if(repeat==="monthly")cur=nextMonthlySameDay(cur,originalDay);else if(repeat==="lastday")cur=nextLastDay(cur);else break}});return rows.map(r=>({...r,effectiveDate:adjustedDate(r)})).filter(r=>r.effectiveDate>=state.openingDate).sort((a,b)=>a.effectiveDate.localeCompare(b.effectiveDate)||a.name.localeCompare(b.name))}
+function money(n){return new Intl.NumberFormat("en-CA",{style:"currency",currency:"CAD"}).format(Number(n)||0)}
+function prettyDate(s){return new Intl.DateTimeFormat("en-CA",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}).format(parseISO(s))}
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function render(){const rows=expandTransactions();let bal=Number(state.openingBalance)||0,current=bal,lowest=bal;const today=todayISO();const html=rows.map(r=>{bal+=(Number(r.in)||0)-(Number(r.out)||0);if(r.effectiveDate<=today)current=bal;if(bal<lowest)lowest=bal;const adjusted=r.effectiveDate!==r.instanceDate;return `<div class="row ${adjusted?"adjusted":""} ${r.effectiveDate===today?"today":""}"><div>${prettyDate(r.effectiveDate)}${adjusted?`<div class="tiny">from ${prettyDate(r.instanceDate)}</div>`:""}</div><div class="money">${r.out?money(r.out):"—"}</div><div class="name" title="${esc(r.name)}">${esc(r.name)}${r.generated?'<div class="tiny">recurring</div>':""}</div><div class="money">${r.in?money(r.in):"—"}</div><div class="money balance">${money(bal)}</div><div><button class="editbtn" data-parent="${r.parentId}" aria-label="Edit ${esc(r.name)}">✎</button></div></div>`}).join("");document.getElementById("ledger").innerHTML=html||'<div class="empty">No transactions yet. Add one and the prophecy begins. 🔮</div>';document.getElementById("startingSummary").textContent=money(state.openingBalance);document.getElementById("currentSummary").textContent=money(current);document.getElementById("lowestSummary").textContent=money(lowest);document.querySelectorAll(".editbtn").forEach(b=>b.addEventListener("click",()=>openEdit(b.dataset.parent)))}
+const txDialog=document.getElementById("txDialog"),txForm=document.getElementById("txForm"),repeatSel=document.getElementById("txRepeat");function toggleUntil(){document.getElementById("repeatUntilWrap").style.display=repeatSel.value==="none"?"none":"block"}repeatSel.addEventListener("change",toggleUntil);
+document.getElementById("addBtn").addEventListener("click",()=>{txForm.reset();document.getElementById("txId").value="";document.getElementById("txTitle").textContent="Add transaction";document.getElementById("txDate").value=todayISO();document.getElementById("deleteBtn").style.display="none";toggleUntil();txDialog.showModal()});
+function openEdit(id){const tx=state.transactions.find(t=>t.id===id);if(!tx)return;document.getElementById("txId").value=tx.id;document.getElementById("txTitle").textContent="Edit transaction";document.getElementById("txName").value=tx.name;document.getElementById("txDate").value=tx.date;document.getElementById("txOut").value=tx.out||"";document.getElementById("txIn").value=tx.in||"";document.getElementById("txRepeat").value=tx.repeat||"none";document.getElementById("txUntil").value=tx.until||"";document.getElementById("deleteBtn").style.display="inline-block";toggleUntil();txDialog.showModal()}
+txForm.addEventListener("submit",e=>{e.preventDefault();const name=document.getElementById("txName").value.trim(),date=document.getElementById("txDate").value,out=Number(document.getElementById("txOut").value)||0,inc=Number(document.getElementById("txIn").value)||0;if(!name||!date){alert("Please add an item name and date.");return}if(out<=0&&inc<=0){alert("Enter money out or money in.");return}const id=document.getElementById("txId").value||(crypto.randomUUID?crypto.randomUUID():String(Date.now()));const repeat=document.getElementById("txRepeat").value,until=repeat==="none"?"":(document.getElementById("txUntil").value||addDays(date,365)),tx={id,name,date,out,in:inc,repeat,until},idx=state.transactions.findIndex(t=>t.id===id);if(idx>=0)state.transactions[idx]=tx;else state.transactions.push(tx);txDialog.close();save()});
+document.getElementById("deleteBtn").addEventListener("click",()=>{const id=document.getElementById("txId").value,tx=state.transactions.find(t=>t.id===id);if(tx&&confirm(`Delete \"${tx.name}\"${tx.repeat!=="none"?" and its future recurring entries":""}?`)){state.transactions=state.transactions.filter(t=>t.id!==id);txDialog.close();save()}});document.getElementById("cancelTx").addEventListener("click",()=>txDialog.close());
+const openingDialog=document.getElementById("openingDialog");document.getElementById("openingBtn").addEventListener("click",()=>{document.getElementById("openingDate").value=state.openingDate||todayISO();document.getElementById("openingBalance").value=state.openingBalance||0;openingDialog.showModal()});document.getElementById("openingForm").addEventListener("submit",e=>{e.preventDefault();state.openingDate=document.getElementById("openingDate").value;state.openingBalance=Number(document.getElementById("openingBalance").value)||0;openingDialog.close();save()});document.getElementById("cancelOpening").addEventListener("click",()=>openingDialog.close());
+document.getElementById("exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=`chequebook-prophecy-backup-${todayISO()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),500)});
+document.getElementById("importFile").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!x||!Array.isArray(x.transactions))throw new Error();if(confirm("Replace this app's current data with the imported backup?")){state=x;save()}}catch(err){alert("That file does not look like a valid Chequebook With Prophecy backup.")}e.target.value=""});
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});render();
+})();
+</script>
+</body>
+</html>
