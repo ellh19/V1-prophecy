@@ -1,0 +1,30 @@
+{
+  "id": "./",
+  "name": "The Amazing Prophetic Oracle of Fiduciary Fiscal Fuckery",
+  "short_name": "Oracle",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff9fa",
+  "theme_color": "#fbebee",
+  "icons": [
+    {
+      "src": "oracle-icon-192-v23.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "oracle-icon-512-v23.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "oracle-icon-512-v23.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
