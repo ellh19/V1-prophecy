@@ -131,7 +131,7 @@
       font-size:.86rem;
       max-width:200px;
       text-align:center;
-      transform:translate(-12px, 12px) rotate(5deg);
+      transform:translate(-12px, 6px) rotate(1deg);
       transform-origin:center;
       line-height:1.18;
     }
@@ -433,18 +433,9 @@
       position:relative;
       min-height:72px;
       margin-top:4px;
-      padding:10px 6px 0 56px;
+      padding:10px 6px 0 6px;
     }
-    .leaf-bottom{
-      position:absolute;
-      left:-2px;
-      bottom:-2px;
-      width:45px;
-      height:64px;
-      color:#6f6aa7;
-      opacity:.75;
-    }
-    .bank-note{
+.bank-note{
       position:absolute;
       right:1%;
       bottom:14px;
@@ -457,11 +448,11 @@
     }
     .bottom-phrase{
       position:absolute;
-      left:8%;
+      left:3%;
       bottom:18px;
-      width:42%;
+      width:48%;
       text-align:center;
-      font-size:.86rem;
+      font-size:1rem;
       line-height:1.2;
       transform:rotate(-4deg);
       transform-origin:center;
@@ -565,7 +556,7 @@
       .top-phrase{
         font-size:.75rem;
         max-width:170px;
-        transform:translate(-12px, 12px) rotate(5deg);
+        transform:translate(-12px, 6px) rotate(1deg);
         line-height:1.15;
       }
 .summary{gap:7px;margin-bottom:10px}
@@ -612,11 +603,10 @@
       .footer{
         min-height:70px;
         margin-top:2px;
-        padding-left:50px;
+        padding-left:6px;
       }
-      .leaf-bottom{width:40px;height:59px}
-      .bank-note{font-size:.40rem;width:43%;right:0;bottom:12px;padding-top:0}
-      .bottom-phrase{font-size:.75rem;width:45%;left:7%;right:auto;bottom:18px;transform:rotate(-4deg)}
+.bank-note{font-size:.40rem;width:43%;right:0;bottom:12px;padding-top:0}
+      .bottom-phrase{font-size:.86rem;width:48%;left:2%;right:auto;bottom:18px;transform:rotate(-4deg)}
       .grid2{grid-template-columns:1fr}
     }
 
@@ -657,7 +647,7 @@
     </div>
 
     <div class="meta">
-      <div class="pill">v1.11 · local only</div>
+      <div class="pill">v1.12 · local only</div>
       <div class="scribble top-phrase">love this financially<br>responsible journey<br>for you ♡</div>
 </div>
   </header>
@@ -709,14 +699,7 @@
   </div>
 
   <footer class="footer">
-    <svg class="leaf-bottom" viewBox="0 0 70 100" aria-hidden="true">
-      <path d="M10 94C28 71 36 43 42 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M34 47C18 45 10 39 9 31C22 31 32 36 34 47Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M39 29C53 25 60 18 60 10C48 12 39 18 39 29Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M27 67C13 66 6 60 6 53C18 52 26 57 27 67Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M21 81C34 78 42 70 43 63C32 65 23 71 21 81Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-    </svg>
-    <div class="bank-note">Weekend/Canada closures: income moves to previous banking day.<br>Debits move to following banking day.</div>
+<div class="bank-note">Weekend/Canada closures: income moves to previous banking day.<br>Debits move to following banking day.</div>
     <div class="scribble bottom-phrase">only one impulse purchase?<br>what is this, les mis? ♡</div>
   </footer>
 </div>
