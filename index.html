@@ -715,6 +715,40 @@
     .title-image{display:block;width:100%;height:auto;object-fit:contain;}
     @media(max-width:560px){.brand{min-height:0!important}.title-image-wrap{margin:0 auto 8px}.title-image{width:100%}}
     @media(max-width:380px){.title-image-wrap{margin-bottom:7px}}
+
+    /* v1.18: footer polish only */
+    .bank-note{
+      left:1%;
+      right:auto;
+      top:34px;
+      width:40%;
+      font-size:.40rem;
+    }
+    .pill{
+      left:1%;
+      right:auto;
+      bottom:7px;
+      padding:3px 7px;
+      font-size:.49rem;
+    }
+    .bottom-phrase{
+      left:auto;
+      right:1%;
+      bottom:18px;
+      width:52%;
+      font-size:1.14rem;
+      transform:rotate(4deg);
+    }
+    @media(max-width:560px){
+      .bank-note{left:0;right:auto;top:33px;width:40%;font-size:.36rem}
+      .pill{left:0;right:auto;bottom:5px;padding:3px 7px;font-size:.45rem}
+      .bottom-phrase{left:auto;right:0;bottom:18px;width:53%;font-size:1rem;transform:rotate(4deg)}
+    }
+    @media(max-width:380px){
+      .bank-note{left:0;right:auto;top:33px;width:40%;font-size:.34rem}
+      .pill{left:0;right:auto;bottom:5px;padding:3px 6px;font-size:.43rem}
+      .bottom-phrase{left:auto;right:-1%;bottom:17px;width:54%;font-size:.98rem;transform:rotate(4deg)}
+    }
   </style>
 </head>
 <body>
@@ -776,7 +810,7 @@
   <footer class="footer">
 <div class="bank-note">Weekend/Canada closures: income moves to previous banking day.<br>Debits move to following banking day.</div>
     <div class="scribble bottom-phrase">only one impulse purchase?<br>what is this, les mis? ♡</div>
-    <div class="pill">v1.17 · local only</div>
+    <div class="pill">v1.18 · local only</div>
   </footer>
 </div>
 
