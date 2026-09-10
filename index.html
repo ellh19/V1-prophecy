@@ -75,14 +75,14 @@
       align-items:flex-start;
       gap:7px;
       min-width:0;
-      padding-top:2px;
+      padding-top:8px;
     }
     .title{
       margin:0;
       line-height:.96;
       letter-spacing:-.04em;
       font-size:clamp(1.75rem,5.8vw,2.45rem);
-      font-weight:560;
+      font-weight:470;
     }
     .title-line2{white-space:nowrap;display:inline-block}
     .title .with{
@@ -131,7 +131,8 @@
       font-size:.69rem;
       max-width:155px;
       text-align:center;
-      transform:translateX(-8px);
+      transform:translate(-8px, 10px) rotate(-5deg);
+      transform-origin:center;
       line-height:1.18;
     }
     .leaf-top{
@@ -186,6 +187,13 @@
       font-size:.76rem;
       color:#4d5688;
       line-height:1.2;
+    }
+    .projection-date-hidden{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+      width:1px;
+      height:1px;
     }
     .icon-btn{
       border:0;
@@ -447,11 +455,13 @@
     .bottom-phrase{
       position:absolute;
       right:1%;
-      bottom:7px;
+      bottom:20px;
       width:42%;
       text-align:center;
       font-size:.66rem;
       line-height:1.2;
+      transform:rotate(4deg);
+      transform-origin:center;
     }
 
     /* ---------- dialogs ---------- */
@@ -552,15 +562,10 @@
       .top-phrase{
         font-size:.58rem;
         max-width:112px;
-        transform:translateX(-8px);
+        transform:translate(-8px, 10px) rotate(-5deg);
         line-height:1.15;
       }
-      .leaf-top{
-        width:27px;
-        height:76px;
-        right:-4px;
-      }
-      .summary{gap:7px;margin-bottom:10px}
+.summary{gap:7px;margin-bottom:10px}
       .summary-card{padding:10px 9px 9px;border-radius:18px}
       .summary-label{font-size:.67rem;margin-bottom:4px}
       .summary-value{font-size:1.42rem}
@@ -608,7 +613,7 @@
       }
       .leaf-bottom{width:40px;height:59px}
       .bank-note{font-size:.47rem;width:52%;padding-top:13px}
-      .bottom-phrase{font-size:.57rem;width:43%;right:0;bottom:8px}
+      .bottom-phrase{font-size:.57rem;width:43%;right:0;bottom:19px;transform:rotate(4deg)}
       .grid2{grid-template-columns:1fr}
     }
 
@@ -649,16 +654,9 @@
     </div>
 
     <div class="meta">
-      <div class="pill">v1.2 · local only</div>
+      <div class="pill">v1.3 · local only</div>
       <div class="scribble top-phrase">love this financially responsible journey for you ♡</div>
-      <svg class="leaf-top" viewBox="0 0 48 120" aria-hidden="true">
-        <path d="M28 114C24 85 28 52 30 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M30 26C17 18 14 10 18 3C28 9 32 16 30 26Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M29 48C41 41 45 33 43 27C33 30 28 38 29 48Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M27 68C15 61 11 53 14 46C24 50 29 58 27 68Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M26 90C38 84 42 76 40 70C30 73 25 81 26 90Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
-      </svg>
-    </div>
+</div>
   </header>
 
   <section class="summary" aria-label="Balance summary">
@@ -674,10 +672,8 @@
     <div class="summary-card projected">
       <div class="summary-label">Projected balance</div>
       <div class="summary-value" id="projectedSummary">$0.00</div>
-      <div class="projection-control">
-        <span class="sr-only">Projected balance date</span>
-        <input id="projectionDate" type="date" aria-label="Projected balance date">
-      </div>
+      <div class="summary-date" id="projectionDateLabel">as of Sep 9, 2026</div>
+      <input id="projectionDate" type="date" aria-label="Projected balance date" class="projection-date-hidden">
       <button class="icon-btn" id="projectionCalendarBtn" aria-label="Choose projection date" title="Choose projection date">
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2v3M18 2v3M3.5 8h17M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 12h2M11 12h2M15 12h2M7 16h2M11 16h2M15 16h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
@@ -935,6 +931,7 @@ function render(){
   document.getElementById("currentSummary").textContent=money(current);
   document.getElementById("currentDateLabel").textContent=`as of ${prettyDate(today)}`;
   document.getElementById("projectedSummary").textContent=money(projected);
+  document.getElementById("projectionDateLabel").textContent=`as of ${prettyDate(projectionDate)}`;
 
   document.querySelectorAll(".editbtn").forEach(b=>b.addEventListener("click",()=>openEdit(b.dataset.parent)));
 }
